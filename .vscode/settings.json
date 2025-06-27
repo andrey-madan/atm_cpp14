@@ -1,0 +1,6 @@
+{
+   "cpptest.compilerIdentifier": "gcc_13-64",
+   "cmake.configureOnOpen": false,
+   "cpptest.coverageDataFolder": "${workspaceFolder}/.coverage",
+   "cpptest.testConfiguration": "builtin://MISRA C++ 2023" 
+}

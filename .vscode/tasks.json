@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build and Run - no instrumentation",
+        "type": "shell",
+        "command": "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -S . -B build",
+        "group": "build"
+      },
+      {
+        "label": "Run Static Analysis - MISRA C++ 2023",
+        "type": "shell",
+        "command": "cpptestcli -module . -report MISRAC++2023 -compiler gcc_13-64 -config \"builtin://MISRA C++ 2023\" -exclude \"**/googletest/**\" -exclude \"**/tests/**\" -exclude \"**/googlemock/**\" -input build/compile_commands.json",
+        "group": "build"
+      },
+      {
+        "label": "Build with instrumentation",
+        "type": "shell",
+        "command": "cmake -DCPPTEST_COVERAGE=ON -S . -B build; cmake --build build",
+        "group": "build"
+      },
+      {
+        "label": "Run tests",
+        "type": "shell",
+        "command": "cd build; rm -rf /cpptest-coverage/ATM_Cpp14_lib/ATM_Cpp14_lib.clog; rm -rf gtest_results.xml; ./atm_gtest --gtest_output=xml:atm_gtest_results.xml",
+        "group": "build"
+      },
+      {
+        "label": "Compute Coverage, Index, and Generate Reports",
+        "type": "shell",
+        "command":"cd build; make cpptestcov-compute cpptestcov-suppress cpptestcov-report",
+        "group": "build" 
+      }
+    ]
+}
