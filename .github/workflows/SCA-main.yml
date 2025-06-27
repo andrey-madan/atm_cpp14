@@ -58,9 +58,9 @@ jobs:
         # Uncomment if you are using C/C++test 2020.2 to generate a SARIF report:
         # reportFormat: xml,html,custom
         # additionalParams: '-property report.custom.extension=sarif -property report.custom.xsl.file=${PARASOFT_SARIF_XSL}'
-        additionalParams: -publish -exclude "**/googletest/**" -exclude "**/tests/**" -exclude "**/googlemock/**"
-
-    # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
+        additionalParams: -module . -compiler gcc_13-64 -config "builtin://MISRA C++ 2023"  -compiler gcc_13-64 -publish -exclude "**/googletest/**" -exclude "**/tests/**" -exclude "**/googlemock/**"
+        
+        # Uploads analysis results in the SARIF format, so that they are displayed as GitHub code scanning alerts.
   #  - name: Upload results (SARIF)
   #    if: always()
   #    uses: github/codeql-action/upload-sarif@v3
